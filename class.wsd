@@ -1,0 +1,101 @@
+@startuml jTask_Class_For_Laravel
+
+package laravel {
+    class Model{}
+    class View{}
+    class Controller{}
+    class Request{}
+    class Resource{}
+}
+
+Package jTask.Models{
+    
+class User extends Model{
+    ' + id  : int 
+    ' + name : String 
+    ' + email : String
+    ' + password : String
+
+    + tasks() : [Task]
+    + Project() : [Project]
+    + TaskGroups : [TaskGroup]
+}
+class Project extends Model {
+    ' + id : Int 
+    ' + title : String 
+    ' + discription : String?
+    ' + status : String
+    ' + user_id : int 
+
+    +taskgroups() : [TaskGroup]
+    +tasks() : [Task]
+
+    + user() : User
+}
+class TaskGroup extends Model  {
+    ' + id : Int
+    ' +  title : String 
+    ' + groupable_id : Int 
+    ' + groupable_type : String
+
+    + tasks() : [Task]
+    
+    + project() : Project
+    + user() : User
+}
+class Task extends Model{
+    ' + id :  int
+    ' + body : String 
+    ' + status : String 
+    ' + taskable_id : id 
+    ' + taskable_type : String
+
+    + user() : User
+    + Project() : Project
+    + TaskGroup() : TaskGroup
+}
+}
+
+package jTask.repositries{
+    interface ModelRepositry{
+        + save([dynamic]):Model
+        +update([dynamic] , Model):Model 
+    }
+    class UserRepositry implements ModelRepositry{}
+    class ProjectRepositry implements ModelRepositry{}
+    class TaskGroupRepositry implements ModelRepositry{}
+    class TaskRepositry implements ModelRepositry{}
+    
+}
+Package  jTask.controllers{
+    interface Managable{
+        +index() : View
+        +show(Model) :View
+        +store(Request , ModelRepositry) : View
+        +create() : View
+        +edit(Model): View
+        +update(Model,Request , ModelRepositry): View
+        +delete(Model): View
+        }
+    class UserController extends Controller implements Managable {}
+    class ProjectController extends Controller implements Managable{}
+    class TaskGroupController extends Controller implements Managable{}
+    class TaskController extends Controller implements Managable{}
+    
+}
+Package  jTask.controllers.api{
+    interface Apiable{
+        +index() : [Resource]
+        +show(Model) :Resource
+        +store(Request , ModelRepositry) : Resource
+        +update(Model,Request , ModelRepositry): Resource
+        +delete(Model): Resource
+        }
+    class UserController extends Controller implements Apiable{}
+    class ProjectController extends Controller implements Apiable{}
+    class TaskGroupController extends Controller implements Apiable{}
+    class TaskController extends Controller implements Apiable{}
+  
+}
+
+@enduml

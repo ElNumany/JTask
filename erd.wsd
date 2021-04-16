@@ -1,0 +1,43 @@
+@startuml jTask_ERd
+entity users{
+    *id AI PK 
+    *name Varchar
+    *email String 
+    *password String
+    *usere_id Integer FK usere.id
+
+}
+entity projects{
+    *ud AI PK
+    *title String
+    *discription Stirng 
+    *status String
+    *    usere_id Integer
+
+
+}
+entity task_groups{
+    * id Ai PK 
+    * title string 
+    * groupable_id Integer FK(users.id , project.id)
+    * groupable_type String (User,Project)
+
+}
+entity tasks{
+    *id AI PK
+    *body String 
+    *status String
+    *taskable_id Integer(users.id,task.id,task_group.id)
+    *taskable_type String(User,Project,TaskGroup)
+
+
+}
+tasks }o-- users
+tasks }o-- projects
+projects }o-- users
+task_groups }o-- users
+task_groups }o-- projects
+tasks }o-- task_groups
+
+
+@enduml
