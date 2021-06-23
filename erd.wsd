@@ -8,7 +8,7 @@ entity users{
 
 }
 entity projects{
-    *ud AI PK
+    *uid AI PK
     *title String
     *discription Stirng 
     *status String
