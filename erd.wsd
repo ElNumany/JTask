@@ -1,4 +1,4 @@
-@startuml jTask_ERd
+@startuml jTask_ERD
 entity users{
     *id AI PK 
     *name Varchar
@@ -8,11 +8,11 @@ entity users{
 
 }
 entity projects{
-    *uid AI PK
+    *id AI PK
     *title String
     *discription Stirng 
     *status String
-    *    usere_id Integer
+    *  usere_id Integer
 
 
 }
